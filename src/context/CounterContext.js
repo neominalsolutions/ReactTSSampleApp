@@ -6,11 +6,7 @@ const CounterContext = createContext();
 // counter provider içerisine gönderilecek olan child componentler children ismi ilke gönderilir.
 // uygulamadaki tüm componentleri bu provider ile sarmallıyoruz.
 export const CounterProvider = ({ children }) => {
-	// setCardItems state değiştirir.
-	// cardItems değişen state global olarak erişmemizi sağlar.
-
 	const [counter, setCounter] = useState(0);
-	// seçili olan temamızı context state aldık.
 	// useState normalde local component bazlı çalışır
 	// fakat contextAPI yöntemi ile birlikte sayfalar arası geçişlerde de browser refleshlenene kadar state global olarak saklayabiliriz.
 
