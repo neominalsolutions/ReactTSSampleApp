@@ -1,0 +1,25 @@
+1- Index.tsx dosyasında 
+
+aşağıdaki gibi tüm uygulamayı BrowserRouter ile saralım.
+
+<BrowserRouter>
+<App />
+</BrowserRouter>
+
+2- App.tsx dosyasında ise RouteObject[] ile routing tanımı yaparız.
+aşağıdaki react-router-dom paketinden gelen useRoutes(); hook ile routing dosyalarınızı tanımlayabiliriz.
+
+return UseRoute(routes);
+
+
+3. React uygulamasında Linklerimizi a href yerine <Link to="/">Link-1</Link>
+
+Menu.tsx dosyasında örnek kullanım var
+
+şeklinde tanımlarız.
+
+4. Dinamik olarak sayfaların yönlendirme bazlı çalışması için <Outlet /> componenti kullanıyoruz.
+
+Layout.tsx dosyasında örneği mevcut.
+
+5. React Component içerisinde bir sayfaya yönlendirme yapmak için useNavigate() hook kullanırız. LoginPage sayfasında örneği var.
