@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
+import { CONFIG } from '..';
 
 export type HeaderProps = {
 	text: string; // required
@@ -13,6 +14,9 @@ function Header({ text, content = 'Content' }: HeaderProps) {
 			style={{ backgroundColor: 'GrayText', color: 'white' }}>
 			<Row>
 				<h5>{text}</h5>
+				<p>{process.env.REACT_APP_KEY} Mode</p>
+				<p>{CONFIG.ENV}</p>
+
 				{/* <p>{content}</p> */}
 			</Row>
 		</Container>

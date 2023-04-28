@@ -9,6 +9,8 @@ import { CounterProvider } from './context/CounterContext';
 import { AbilityContext } from './casl/Can';
 import { Ability } from '@casl/ability';
 
+export const CONFIG = require(`./config/config-${process.env.REACT_APP_ENV?.trim()}.json`);
+
 const queryClient = new QueryClient(); // uygulamanın react query statelerini tüm uygulama genelinde desteklemesi için QueryClient sınıfından instace alıp QueryClientProvider olarak tüm uygulama sarmallıyoruz.
 
 // tüm uygulama akışını ilgilendiren tüm yapılandırlamaları Index.tsx dosyasında yapıyoruz.
