@@ -26,7 +26,9 @@ root.render(
 		<AbilityContext.Provider value={ability}>
 			<CounterProvider>
 				<QueryClientProvider client={queryClient}>
-					<App />
+					<React.Suspense fallback={<>Sayfa yüklenemedi!</>}>
+						<App />
+					</React.Suspense>
 				</QueryClientProvider>
 			</CounterProvider>
 		</AbilityContext.Provider>

@@ -1,17 +1,18 @@
 import Layout from './layout/Layout';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { RouteObject, useRoutes } from 'react-router-dom';
-import AboutPage from './pages/about/AboutPage';
-import HomePage from './pages/home/HomePage';
-import Promises from './pages/promises/Promises';
-import LoginPage from './pages/login/LoginPage';
-import NewLoginPage from './pages/login/NewLoginPage';
-import NewHomePage from './pages/home/NewHomePage';
-import Counter from './pages/counter/Counter';
 import { LocalStorageService } from './storage/LocalStorageService';
-import { useContext } from 'react';
+import { lazy, useContext } from 'react';
 import { AbilityContext } from './casl/Can';
 import { updateAbility } from './casl/Ability';
+
+const HomePage = lazy(() => import('./pages/home/HomePage'));
+const NewHomePage = lazy(() => import('./pages/home/NewHomePage'));
+const AboutPage = lazy(() => import('./pages/about/AboutPage'));
+const Promises = lazy(() => import('./pages/promises/Promises'));
+const LoginPage = lazy(() => import('./pages/login/LoginPage'));
+const NewLoginPage = lazy(() => import('./pages/login/NewLoginPage'));
+const Counter = lazy(() => import('./pages/counter/Counter'));
 
 function App() {
 	// eğer ki tarayıcı refreshlenirse bu durumda kullanıcı hala oturumu kapamadıysa git kullanıcın localstorage user-info bilgilerinden yeniden uygulama genelindeki yeteneklerinmi güncelle.
