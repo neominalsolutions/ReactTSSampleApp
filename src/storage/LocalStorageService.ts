@@ -41,23 +41,7 @@ export class LocalStorageService {
 		localStorage.removeItem('userInfo');
 	}
 
-	public static getUserInfo(): any {
-		if (localStorage.getItem('userInfo') != undefined) {
-			return JSON.parse(localStorage.getItem('userInfo') as string); // JSON deserialize ettik.
-		}
 
-		return null;
-	}
 
-	public static getEmail(): string {
-		const userInfo = this.getUserInfo();
-		console.log('userInfo', userInfo);
-
-		if (userInfo != null) {
-			const email = userInfo?.email;
-			return email;
-		}
-
-		return 'Guest';
-	}
+	
 }

@@ -11,6 +11,7 @@ import { QueryClient, useMutation } from 'react-query';
 import { updateAbility } from '../../casl/Ability';
 import { AbilityContext } from '../../casl/Can';
 import { LocalStorageService } from '../../storage/LocalStorageService';
+import { UserProfileService } from '../../storage/UserProfileService';
 
 function NewLoginPage() {
 	// register net core ortamındaki asp-for yada html name alanı, forma hangi field register edileceğini yönetir.
@@ -49,7 +50,7 @@ function NewLoginPage() {
 			// formData post işlemi sonunda alacağımız result bilgisi
 			console.log('onSuccess', result, formData);
 			if (result.isSucceded) {
-				updateAbility(ability, LocalStorageService.getUserInfo());
+				updateAbility(ability, UserProfileService.getUserInfo());
 				navigate('/');
 			}
 		},

@@ -1,10 +1,16 @@
 import Layout from './layout/Layout';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { RouteObject, useRoutes } from 'react-router-dom';
+import { Link, Outlet, RouteObject, useRoutes } from 'react-router-dom';
 import { LocalStorageService } from './storage/LocalStorageService';
 import { lazy, useContext } from 'react';
 import { AbilityContext } from './casl/Can';
 import { updateAbility } from './casl/Ability';
+import AuthGuard from './guards/AuthGuard';
+import UnAuthorizedPage from './pages/unauthorized/UnAuthorizedPage';
+import { UserProfileService } from './storage/UserProfileService';
+import AdminGuard from './guards/AdminGuard';
+import { Col, Container, Row } from 'react-bootstrap';
+import UsersDetailPage from './pages/users-detail/UsersDetailPage';
 
 const HomePage = lazy(() => import('./pages/home/HomePage'));
 const NewHomePage = lazy(() => import('./pages/home/NewHomePage'));
@@ -17,7 +23,7 @@ const Counter = lazy(() => import('./pages/counter/Counter'));
 function App() {
 	// eğer ki tarayıcı refreshlenirse bu durumda kullanıcı hala oturumu kapamadıysa git kullanıcın localstorage user-info bilgilerinden yeniden uygulama genelindeki yeteneklerinmi güncelle.
 	const ability = useContext(AbilityContext);
-	const user = LocalStorageService.getUserInfo();
+	const user = UserProfileService.getUserInfo();
 
 	// yeteneklerinmi güncelle.
 	updateAbility(ability, user);
@@ -60,12 +66,50 @@ function App() {
 			element: <NewLoginPage />,
 		},
 		{
+			path: '/account/unauthorized',
+			element: <UnAuthorizedPage />,
+		},
+		{
 			path: '/admin', // admin routes
-			element: <>Admin Page</>,
+			// sadece login olan kullanıcılar admin sayfasına girebilsin diye // <>Admin Page</> componenti AuthGuard arasına aldık
+			element: (
+				<AuthGuard>
+					<Container fluid>
+						<Row>
+							<Col>
+								<h1>Admin Layout</h1>
+								<nav>
+									<Link to='users'>Admin Users</Link>{' '}
+									<Link to='/home'>Anasayfa</Link>{' '}
+									<Link to='users/1'>User By Id</Link>{' '}
+									{/* <Link to=''>Anasayfa</Link> Admin routeları altında olduğumuz için direkt admin route gitti  <Link to='home'>Anasayfa</Link> /admin/home route yapıcaktır dikkat edelim. */}
+								</nav>
+								<main
+									className='m-5 p-3'
+									style={{
+										borderColor: 'gray',
+										borderWidth: 1,
+										borderStyle: 'solid',
+									}}>
+									<Outlet />
+								</main>
+							</Col>
+						</Row>
+					</Container>
+				</AuthGuard>
+			),
 			children: [
 				{
 					path: '/admin/users',
-					element: <>User Page</>,
+					element: (
+						<AdminGuard>
+							<>User Page</>
+						</AdminGuard>
+					),
+				},
+				{
+					path: '/admin/users/:id', // dinamik olarak parametre bazlı route tanımlama
+					element: <UsersDetailPage />,
 				},
 			],
 		},
