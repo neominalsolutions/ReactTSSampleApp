@@ -1,22 +1,50 @@
 import React from 'react';
-import { Button, Card, CardGroup, Col, Row } from 'react-bootstrap';
+import { Alert, Button, Card, CardGroup, Col, Row } from 'react-bootstrap';
 import { Ticket } from '../network/taskClient';
 import moment from 'moment';
 import { DateHelper } from '../utils/dateHelper';
+import { AppDispatch, RootState } from '../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { add } from '../store/features/ticketSlice';
 
 export type TicketCardProps = {
 	tickets: Ticket[];
 };
 
 function TicketCard({ tickets }: TicketCardProps) {
+	// bir aksiyonun tetiklenmesi için useDispatch hook kullanırız.
+	const dispatch = useDispatch<AppDispatch>();
+	const ticketState = useSelector((state: RootState) => state.ticketState);
+
+	const isSelected = (ticketId: string) => {
+		if (ticketState.items.find((x) => x.id == ticketId)) {
+			return true;
+		}
+
+		return false;
+	};
+
 	return (
 		<div className='mt-3 d-flex flex-row flex-wrap'>
+			<div style={{ width: '100vw' }}>
+				{ticketState.succeeded && (
+					<Alert variant='success'>{ticketState.status}</Alert>
+				)}
+				{ticketState.succeeded == false && (
+					<Alert variant='warning'>{ticketState.status}</Alert>
+				)}
+			</div>
 			{tickets.map((ticket: Ticket) => {
 				return (
 					<Card
 						key={ticket.id}
 						className='p-2 m-3'>
-						<Card.Body className='bg-light'>
+						<Card.Body
+							className={
+								isSelected(ticket.id)
+									? 'bg-warning text-dark'
+									: 'bg-white'
+							}>
 							<Card.Title className='text-primary'>
 								Görev Sahibi:
 								<br></br>
@@ -28,7 +56,12 @@ function TicketCard({ tickets }: TicketCardProps) {
 								{ticket.description}
 							</Card.Text>
 							<Card.Text>
-								<Button variant='secondary'>
+								<Button
+									onClick={() => {
+										// dispatch ile redux üzerinden action tetikleriz.
+										dispatch(add(ticket));
+									}}
+									variant='secondary'>
 									{' '}
 									Yapılacak Listesine Ekle{' '}
 								</Button>

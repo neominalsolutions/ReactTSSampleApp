@@ -3,6 +3,9 @@ import { Container, Nav, NavDropdown, Navbar } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { LocalStorageService } from '../storage/LocalStorageService';
 import { AbilityContext, Can } from '../casl/Can';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+import { Ticket } from '../network/taskClient';
 
 export interface IMenu {
 	text: string;
@@ -12,6 +15,11 @@ export interface IMenu {
 function Menu() {
 	const navigate = useNavigate();
 	const ability = useContext(AbilityContext);
+
+	// store bağlanıp store içindeki hangi state çekmek istersek o state useSelector() hook ileçağırıyoruz.
+	const selectedTickets = useSelector(
+		(state: RootState) => state.ticketState
+	);
 
 	const menuList: Array<IMenu> = [
 		{
@@ -54,14 +62,15 @@ function Menu() {
 						})}
 
 						<NavDropdown
-							title='Yapılacaklar'
+							title={`${selectedTickets.items.length} adet`}
 							id='basic-nav-dropdown'>
-							<NavDropdown.Item>
-								<div>Görev 1</div>
-							</NavDropdown.Item>
-							<NavDropdown.Item>
-								<div>Görev 2</div>
-							</NavDropdown.Item>
+							{selectedTickets.items.map((ticket: Ticket) => {
+								return (
+									<NavDropdown.Item>
+										<div>{ticket.description}</div>
+									</NavDropdown.Item>
+								);
+							})}
 						</NavDropdown>
 					</Nav>
 				</Navbar.Collapse>

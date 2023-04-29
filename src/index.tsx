@@ -8,6 +8,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { CounterProvider } from './context/CounterContext';
 import { AbilityContext } from './casl/Can';
 import { Ability } from '@casl/ability';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 export const CONFIG = require(`./config/config-${process.env.REACT_APP_ENV?.trim()}.json`);
 
@@ -21,17 +23,21 @@ const root = ReactDOM.createRoot(
 
 const ability = new Ability();
 
+// provider store yapısı ile uygulama artık redux ile çalışacağını anladı. store üzerinden çalışacak.
+
 root.render(
 	<BrowserRouter>
-		<AbilityContext.Provider value={ability}>
-			<CounterProvider>
-				<QueryClientProvider client={queryClient}>
-					<React.Suspense fallback={<>Sayfa yüklenemedi!</>}>
-						<App />
-					</React.Suspense>
-				</QueryClientProvider>
-			</CounterProvider>
-		</AbilityContext.Provider>
+		<Provider store={store}>
+			<AbilityContext.Provider value={ability}>
+				<CounterProvider>
+					<QueryClientProvider client={queryClient}>
+						<React.Suspense fallback={<>Sayfa yüklenemedi!</>}>
+							<App />
+						</React.Suspense>
+					</QueryClientProvider>
+				</CounterProvider>
+			</AbilityContext.Provider>
+		</Provider>
 	</BrowserRouter>
 
 	// <React.StrictMode>

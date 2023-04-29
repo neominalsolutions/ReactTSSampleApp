@@ -113,6 +113,10 @@ function App() {
 				},
 			],
 		},
+		{
+			path: '*', // eğer yukarıdaki pathlerden biri bulunmazsa bu durumda bir componente yönlendirerek bu sayfanın olmadığını söyleriz
+			element: <>Not Found Page</>,
+		},
 	];
 	//useRoutes();
 	// useRoute ile uygulama bu routeları kullansın
