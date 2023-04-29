@@ -11,6 +11,7 @@ import { UserProfileService } from './storage/UserProfileService';
 import AdminGuard from './guards/AdminGuard';
 import { Col, Container, Row } from 'react-bootstrap';
 import UsersDetailPage from './pages/users-detail/UsersDetailPage';
+import FileUploadPage from './pages/uploads/FileUploadPage';
 
 const HomePage = lazy(() => import('./pages/home/HomePage'));
 const NewHomePage = lazy(() => import('./pages/home/NewHomePage'));
@@ -54,6 +55,10 @@ function App() {
 				{
 					path: '/counter',
 					element: <Counter />,
+				},
+				{
+					path: '/file-upload',
+					element: <FileUploadPage />,
 				},
 			],
 		},

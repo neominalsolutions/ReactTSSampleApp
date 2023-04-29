@@ -12,6 +12,7 @@ import { updateAbility } from '../../casl/Ability';
 import { AbilityContext } from '../../casl/Can';
 import { LocalStorageService } from '../../storage/LocalStorageService';
 import { UserProfileService } from '../../storage/UserProfileService';
+import { useTranslation } from 'react-i18next';
 
 function NewLoginPage() {
 	// register net core ortamındaki asp-for yada html name alanı, forma hangi field register edileceğini yönetir.
@@ -21,6 +22,8 @@ function NewLoginPage() {
 	const ability = useContext(AbilityContext);
 	const loginService = new LoginClient();
 	const navigate = useNavigate(); // hooklar sadece function body içerisinde çağırılırlar.
+	const { t } = useTranslation(); // dil ile ilgili işlemleri yaptığımız hook.
+	// t ile dili key değerine ekrana basabiliriz.
 
 	useEffect(() => {
 		// const navigate = useNavigate();
@@ -117,7 +120,7 @@ function NewLoginPage() {
 									// custom bir input validation varsa validate ile yazabiliri
 									return (
 										value.includes('@') ||
-										'E-posta formatına uygun giriniz'
+										t('validation.emailMessage').valueOf()
 									);
 								},
 							})} // form name email state bağladık
@@ -137,8 +140,9 @@ function NewLoginPage() {
 								},
 								minLength: {
 									value: 8,
-									message:
-										'parola en az 8 karakter olmalıdır',
+									message: t('validation.minLength', {
+										min: 8,
+									}).valueOf(),
 								},
 								validate: (value) => {
 									return (

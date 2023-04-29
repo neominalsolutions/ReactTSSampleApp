@@ -10,8 +10,26 @@ import { AbilityContext } from './casl/Can';
 import { Ability } from '@casl/ability';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import tr from './i18n/tr';
+import en from './i18n/en';
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
 export const CONFIG = require(`./config/config-${process.env.REACT_APP_ENV?.trim()}.json`);
+
+const resources = {
+	'tr-TR': tr,
+	'en-US': en,
+};
+
+// middleware ile i18 hangi dilleri desteklediğini uygulamının index dosyasında tanımlayıp, default lng belirledik. hata durumda ise hangi dil dosyasının kullanılacağınıda belirledik.
+i18n.use(initReactI18next).init({
+	resources,
+	lng: 'tr-TR',
+	fallbackLng: 'tr-TR',
+});
+
+export default i18n;
 
 const queryClient = new QueryClient(); // uygulamanın react query statelerini tüm uygulama genelinde desteklemesi için QueryClient sınıfından instace alıp QueryClientProvider olarak tüm uygulama sarmallıyoruz.
 

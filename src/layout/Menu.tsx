@@ -6,6 +6,7 @@ import { AbilityContext, Can } from '../casl/Can';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { Ticket } from '../network/taskClient';
+import { useTranslation } from 'react-i18next';
 
 export interface IMenu {
 	text: string;
@@ -15,32 +16,43 @@ export interface IMenu {
 function Menu() {
 	const navigate = useNavigate();
 	const ability = useContext(AbilityContext);
+	const { t, i18n } = useTranslation(); // dil ile ilgili işlemleri yaptığımız hook.
+	// t ile dili key değerine ekrana basabiliriz.
 
 	// store bağlanıp store içindeki hangi state çekmek istersek o state useSelector() hook ileçağırıyoruz.
 	const selectedTickets = useSelector(
 		(state: RootState) => state.ticketState
 	);
 
+	const changeLang = (lng: string) => {
+		console.log('lng', lng, i18n);
+		i18n.changeLanguage(lng);
+	};
+
 	const menuList: Array<IMenu> = [
 		{
-			text: 'Anasayfa',
+			text: t('menu.home'),
 			url: '/',
 		},
 		{
-			text: 'Anasayfa Yeni',
+			text: t('menu.home'),
 			url: '/home',
 		},
 		{
-			text: 'Hakkımızda',
+			text: t('menu.about'),
 			url: '/about',
 		},
 		{
-			text: 'Promise Örneği',
+			text: t('menu.promise'),
 			url: '/promises',
 		},
 		{
-			text: 'Context API Örneği',
+			text: t('menu.contextApi'),
 			url: '/counter',
+		},
+		{
+			text: t('menu.fileUpload'),
+			url: '/file-upload',
 		},
 	];
 
@@ -62,9 +74,22 @@ function Menu() {
 						})}
 
 						<NavDropdown
-							title={`${selectedTickets.items.length} adet`}
+							title={t('menu.languages')}
 							id='basic-nav-dropdown'>
-							{selectedTickets.items.map((ticket: Ticket) => {
+							<NavDropdown.Item
+								onClick={() => changeLang('tr-TR')}>
+								<div> Türkçe </div>
+							</NavDropdown.Item>
+							<NavDropdown.Item
+								onClick={() => changeLang('en-US')}>
+								<div> İngilizce </div>
+							</NavDropdown.Item>
+						</NavDropdown>
+
+						<NavDropdown
+							title={`${selectedTickets?.items.length} adet`}
+							id='basic-nav-dropdown'>
+							{selectedTickets?.items.map((ticket: Ticket) => {
 								return (
 									<NavDropdown.Item>
 										<div>{ticket.description}</div>
@@ -90,15 +115,15 @@ function Menu() {
 								</Link>
 							</NavDropdown.Item>
 						)}
-						{ability.can('unauthorized') && (
-							<NavDropdown.Item>
-								<Link
-									style={{ textDecoration: 'none' }}
-									to={'/account/new-login'}>
-									Oturum Aç (Yeni)
-								</Link>
-							</NavDropdown.Item>
-						)}
+						{/* {ability.can('unauthorized') && ( */}
+						<NavDropdown.Item>
+							<Link
+								style={{ textDecoration: 'none' }}
+								to={'/account/new-login'}>
+								Oturum Aç (Yeni)
+							</Link>
+						</NavDropdown.Item>
+						{/* )} */}
 
 						{ability.can('authorized') && (
 							<NavDropdown.Item>
