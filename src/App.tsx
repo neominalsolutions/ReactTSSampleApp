@@ -12,6 +12,7 @@ import AdminGuard from './guards/AdminGuard';
 import { Col, Container, Row } from 'react-bootstrap';
 import UsersDetailPage from './pages/users-detail/UsersDetailPage';
 import FileUploadPage from './pages/uploads/FileUploadPage';
+import TicketDetailPage from './pages/ticket/TicketDetailPage';
 
 const HomePage = lazy(() => import('./pages/home/HomePage'));
 const NewHomePage = lazy(() => import('./pages/home/NewHomePage'));
@@ -59,6 +60,10 @@ function App() {
 				{
 					path: '/file-upload',
 					element: <FileUploadPage />,
+				},
+				{
+					path: '/ticket-detail/:id',
+					element: <TicketDetailPage />,
 				},
 			],
 		},

@@ -31,6 +31,10 @@ export class TicketClient implements ITicketClient {
 		});
 	}
 
+	getTicket(id: string): Promise<Ticket> {
+		return this.httpClient.get(`api/ticketsById?ticketId=${id}`);
+	}
+
 	getTickets(signal?: any): Promise<Ticket[]> {
 		console.log('signal', signal);
 		return this.httpClient.get(this.endpoint, signal);

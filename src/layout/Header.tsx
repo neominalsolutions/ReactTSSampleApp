@@ -1,11 +1,18 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { CONFIG } from '..';
+import styled from 'styled-components';
 
 export type HeaderProps = {
 	text: string; // required
 	content?: string; // optional
 };
+
+const Title = styled.h1`
+	font-size: 1.5em;
+	text-align: center;
+	color: palevioletred;
+`;
 
 function Header({ text, content = 'Content' }: HeaderProps) {
 	return (
@@ -13,7 +20,9 @@ function Header({ text, content = 'Content' }: HeaderProps) {
 			fluid
 			style={{ backgroundColor: 'GrayText', color: 'white' }}>
 			<Row>
-				<h5>{text}</h5>
+				<h5>
+					<Title>{text}</Title>
+				</h5>
 				{/* <p>{process.env.REACT_APP_EmployeeEndPoint} Mode</p> */}
 				<p>{CONFIG.ENV}</p>
 

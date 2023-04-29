@@ -6,6 +6,7 @@ import { DateHelper } from '../utils/dateHelper';
 import { AppDispatch, RootState } from '../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { add } from '../store/features/ticketSlice';
+import { Link } from 'react-router-dom';
 
 export type TicketCardProps = {
 	tickets: Ticket[];
@@ -65,6 +66,11 @@ function TicketCard({ tickets }: TicketCardProps) {
 									{' '}
 									Yapılacak Listesine Ekle{' '}
 								</Button>
+							</Card.Text>
+							<Card.Text>
+								<Link to={`/ticket-detail/${ticket.id}`}>
+									Detay
+								</Link>
 							</Card.Text>
 						</Card.Body>
 						<Card.Footer>
