@@ -2,7 +2,7 @@ import Layout from './layout/Layout';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, Outlet, RouteObject, useRoutes } from 'react-router-dom';
 import { LocalStorageService } from './storage/LocalStorageService';
-import { lazy, useContext } from 'react';
+import { lazy, useContext, useEffect } from 'react';
 import { AbilityContext } from './casl/Can';
 import { updateAbility } from './casl/Ability';
 import AuthGuard from './guards/AuthGuard';
@@ -13,6 +13,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import UsersDetailPage from './pages/users-detail/UsersDetailPage';
 import FileUploadPage from './pages/uploads/FileUploadPage';
 import TicketDetailPage from './pages/ticket/TicketDetailPage';
+import { useTranslation } from 'react-i18next';
 
 // lazy load performans özelliğ ile sayfaları ayrı ayarı dosyalara bölüp kendi içlerinde bir modul olarak çalışacak şekle getirdik.
 // uygulamanın ilk açılışında bu componentlerin hepsi yüklenemez.
@@ -33,6 +34,29 @@ function App() {
 	// eğer ki tarayıcı refreshlenirse bu durumda kullanıcı hala oturumu kapamadıysa git kullanıcın localstorage user-info bilgilerinden yeniden uygulama genelindeki yeteneklerinmi güncelle.
 	const ability = useContext(AbilityContext);
 	const user = UserProfileService.getUserInfo();
+	const { t, i18n } = useTranslation();
+
+	useEffect(() => {
+		// dil değişim algoritması
+		setInterval(() => {
+			const oldlng: string = i18n.language;
+			console.log('oldlng', oldlng);
+
+			const lngs = ['tr-TR', 'en-US'];
+
+			lngs.forEach((currentLng: string, index: number) => {
+				console.log('index', index);
+				let currentIndex = -1;
+				if (oldlng === currentLng) {
+					console.log('1-index', index);
+					currentIndex = index + 1;
+					const currentLng = lngs[currentIndex];
+					console.log('currentLng', currentLng);
+					i18n.changeLanguage(currentLng);
+				}
+			});
+		}, 3000);
+	}, []);
 
 	// yeteneklerinmi güncelle.
 	updateAbility(ability, user);
