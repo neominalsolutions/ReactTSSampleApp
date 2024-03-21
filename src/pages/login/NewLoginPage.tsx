@@ -37,7 +37,7 @@ function NewLoginPage() {
 		formState: { errors },
 	} = useForm<LoginModel>({
 		defaultValues: {
-			email: 'test@test.com',
+			username: 'test@test.com',
 			password: 'Test12345?',
 		},
 	});
@@ -53,7 +53,7 @@ function NewLoginPage() {
 			// formData post işlemi sonunda alacağımız result bilgisi
 			console.log('onSuccess', result, formData);
 			if (result.isSucceded) {
-				updateAbility(ability, UserProfileService.getUserInfo());
+				// updateAbility(ability, UserProfileService.getUserInfo());
 				navigate('/');
 			}
 		},
@@ -97,40 +97,31 @@ function NewLoginPage() {
 		<Row>
 			{loginMutation.isLoading && <>... Loading</>}
 			{loginMutation.isError && (
-				<Alert variant={'danger'}>
-					{loginMutation.error.errorMessage}
-				</Alert>
+				<Alert variant={'danger'}>{loginMutation.error.errorMessage}</Alert>
 			)}
-			<Col
-				className='m-auto'
-				md={4}>
-				<div className='container p-5'>
+			<Col className="m-auto" md={4}>
+				<div className="container p-5">
 					<h1> Giriş </h1>
-					<form
-						method='post'
-						onSubmit={handleSubmit(onSubmit)}
-						noValidate>
+					<form method="post" onSubmit={handleSubmit(onSubmit)} noValidate>
 						<input
-							{...register('email', {
+							{...register('username', {
 								required: {
 									value: true,
 									message: 'E-posta boş geçilemez',
 								},
-								validate: (value) => {
-									// custom bir input validation varsa validate ile yazabiliri
-									return (
-										value.includes('@') ||
-										t('validation.emailMessage').valueOf()
-									);
-								},
+								// validate: (value) => {
+								// 	// custom bir input validation varsa validate ile yazabiliri
+								// 	return (
+								// 		value.includes('@') ||
+								// 		t('validation.emailMessage').valueOf()
+								// 	);
+								// },
 							})} // form name email state bağladık
-							className='form-control'
-							type='email'
-							placeholder='email'
+							className="form-control"
+							type="text"
+							placeholder="email"
 						/>
-						<span className='text-danger'>
-							{errors.email?.message}
-						</span>
+						<span className="text-danger">{errors.username?.message}</span>
 						<br></br>
 						<input
 							{...register('password', {
@@ -146,31 +137,23 @@ function NewLoginPage() {
 								},
 								validate: (value) => {
 									return (
-										[
-											/[a-z]/,
-											/[A-Z]/,
-											/[0-9]/,
-											/[^a-zA-Z0-9]/,
-										].every((pattern) =>
-											pattern.test(value)
-										) ||
-										'must include lower, upper, number, and special chars'
+										[/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/].every(
+											(pattern) => pattern.test(value)
+										) || 'must include lower, upper, number, and special chars'
 									);
 								},
 							})}
-							className='form-control'
-							type='password'
-							placeholder='password'
+							className="form-control"
+							type="password"
+							placeholder="password"
 						/>
-						<span className='text-danger'>
-							{errors.password?.message}
-						</span>
+						<span className="text-danger">{errors.password?.message}</span>
 						<br></br>
-						<div className='d-flex flex-row'>
+						<div className="d-flex flex-row">
 							<input
-								className='btn btn-success ms-auto'
-								type='submit'
-								value='Oturum Aç'
+								className="btn btn-success ms-auto"
+								type="submit"
+								value="Oturum Aç"
 							/>
 						</div>
 					</form>

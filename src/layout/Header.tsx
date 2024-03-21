@@ -14,17 +14,15 @@ const Title = styled.h1`
 	color: palevioletred;
 `;
 
-function Header({ text, content = 'Content' }: HeaderProps) {
+function Header({ text, content = 'Content' }: HeaderProps) {https://testservice.antalya-airport.aero/api
 	return (
-		<Container
-			fluid
-			style={{ backgroundColor: 'GrayText', color: 'white' }}>
+		<Container fluid style={{ backgroundColor: 'GrayText', color: 'white' }}>
 			<Row>
 				<h5>
 					<Title>{text}</Title>
 				</h5>
-				{/* <p>{process.env.REACT_APP_EmployeeEndPoint} Mode</p> */}
-				<p>{CONFIG.ENV}</p>
+				<p>{process.env.REACT_APP_EmployeeEndPoint} Mode</p>
+				<p>Config Environment : {CONFIG.ENV}</p>
 
 				{/* <p>{content}</p> */}
 			</Row>

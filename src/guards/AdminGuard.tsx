@@ -14,20 +14,20 @@ export default function AdminGuard({ children }: Props) {
 
 	console.log('location', location);
 
-	const isAuthenticated =
-		LocalStorageService.getAccessToken() == null ? false : true;
+	// const isAuthenticated =
+	// 	LocalStorageService.getAccessToken() == null ? false : true;
 
-	const roleExist = UserProfileService.HasRole('Admin');
+	// const roleExist = UserProfileService.HasRole('Admin');
 
-	console.log('roleExist', roleExist);
+	// console.log('roleExist', roleExist);
 
-	if (!isAuthenticated || !roleExist) {
-		return (
-			<Navigate
-				to='/account/unauthorized'
-				state={{ from: location }}></Navigate>
-		);
-	}
+	// if (!isAuthenticated || !roleExist) {
+	// 	return (
+	// 		<Navigate
+	// 			to='/account/unauthorized'
+	// 			state={{ from: location }}></Navigate>
+	// 	);
+	// }
 
 	return children;
 }

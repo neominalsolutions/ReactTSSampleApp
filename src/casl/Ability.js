@@ -11,11 +11,11 @@ export function updateAbility(ability, user) {
 			//can('update', 'post',{published:true}); // publish edilen makaleleri update edebilirim.
 		}
 
-		const userPermissions = JSON.parse(user.permissions);
+		// const userPermissions = JSON.parse(user.permissions);
 
-		for (const permission of userPermissions) {
-			can(permission.Key, permission.Value);
-		}
+		// for (const permission of userPermissions) {
+		// 	can(permission.Key, permission.Value);
+		// }
 
 		can('authorized'); // kimlik doğrulanmıştır
 	} else {

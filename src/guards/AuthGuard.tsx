@@ -13,16 +13,16 @@ export default function AuthGuard({ children }: Props) {
 
 	console.log('location', location);
 
-	const isAuthenticated =
-		LocalStorageService.getAccessToken() == null ? false : true;
+	// const isAuthenticated =
+	// 	LocalStorageService.getAccessToken() == null ? false : true;
 
-	if (!isAuthenticated) {
-		return (
-			<Navigate
-				to='/account/new-login'
-				state={{ from: location }}></Navigate>
-		);
-	}
+	// if (!isAuthenticated) {
+	// 	return (
+	// 		<Navigate
+	// 			to='/account/new-login'
+	// 			state={{ from: location }}></Navigate>
+	// 	);
+	// }
 
 	return children;
 }

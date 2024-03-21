@@ -14,6 +14,13 @@ import UsersDetailPage from './pages/users-detail/UsersDetailPage';
 import FileUploadPage from './pages/uploads/FileUploadPage';
 import TicketDetailPage from './pages/ticket/TicketDetailPage';
 
+// lazy load performans özelliğ ile sayfaları ayrı ayarı dosyalara bölüp kendi içlerinde bir modul olarak çalışacak şekle getirdik.
+// uygulamanın ilk açılışında bu componentlerin hepsi yüklenemez.
+// sadece ilgli path ile ilgili component doma basılır.
+// doma birkez basılan component bundan sonra dom referansından çalışır.
+// tekrar yüklenemesi için Reload ile sayfa yenilenmelidir.
+// biz bu yönteme lazy loading ismini veriyoruz.
+// Not lazy kullanırsak, ilgili componentler sayfaya async olarak yüklendiğinden suspanse ile uygulamayı sarmallamamız lazım.
 const HomePage = lazy(() => import('./pages/home/HomePage'));
 const NewHomePage = lazy(() => import('./pages/home/NewHomePage'));
 const AboutPage = lazy(() => import('./pages/about/AboutPage'));
@@ -35,7 +42,7 @@ function App() {
 	const routes: RouteObject[] = [
 		{
 			path: '/',
-			element: <Layout />, // nested route yapısı ile layout altında tanımlanan children dizisindeki tanımların hepsi layout component üzerinden çalışacaktır.
+			Component: Layout, // nested route yapısı ile layout altında tanımlanan children dizisindeki tanımların hepsi layout component üzerinden çalışacaktır.
 			children: [
 				{
 					path: '/',
@@ -89,18 +96,19 @@ function App() {
 							<Col>
 								<h1>Admin Layout</h1>
 								<nav>
-									<Link to='users'>Admin Users</Link>{' '}
-									<Link to='/home'>Anasayfa</Link>{' '}
-									<Link to='users/1'>User By Id</Link>{' '}
+									<Link to="users">Admin Users</Link>{' '}
+									<Link to="/home">Anasayfa</Link>{' '}
+									<Link to="users/1">User By Id</Link>{' '}
 									{/* <Link to=''>Anasayfa</Link> Admin routeları altında olduğumuz için direkt admin route gitti  <Link to='home'>Anasayfa</Link> /admin/home route yapıcaktır dikkat edelim. */}
 								</nav>
 								<main
-									className='m-5 p-3'
+									className="m-5 p-3"
 									style={{
 										borderColor: 'gray',
 										borderWidth: 1,
 										borderStyle: 'solid',
-									}}>
+									}}
+								>
 									<Outlet />
 								</main>
 							</Col>

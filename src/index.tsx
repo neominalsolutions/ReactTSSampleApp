@@ -17,6 +17,7 @@ import { initReactI18next } from 'react-i18next';
 
 export const CONFIG = require(`./config/config-${process.env.REACT_APP_ENV?.trim()}.json`);
 
+// Hangi dil destekleri var
 const resources = {
 	'tr-TR': tr,
 	'en-US': en,
@@ -26,7 +27,7 @@ const resources = {
 i18n.use(initReactI18next).init({
 	resources,
 	lng: 'tr-TR',
-	fallbackLng: 'tr-TR',
+	fallbackLng: 'tr-TR', // hata durumu olur eğer ilgili kaydı ait farklı dil seçeneğinde bir key bulunamaz ise bu durumda default olarak türkçesi üzerinden göster.
 });
 
 export default i18n;
@@ -49,6 +50,7 @@ root.render(
 			<AbilityContext.Provider value={ability}>
 				<CounterProvider>
 					<QueryClientProvider client={queryClient}>
+						{/* uygulama olduki asenkron olarak yüklenemedi bu durumda Sayfa yüklenemedi! atayüzü görünüyor veya component de yapabiliriz. */}
 						<React.Suspense fallback={<>Sayfa yüklenemedi!</>}>
 							<App />
 						</React.Suspense>

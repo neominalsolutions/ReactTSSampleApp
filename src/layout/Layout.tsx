@@ -5,6 +5,7 @@ import Footer from './Footer';
 import { Outlet } from 'react-router-dom';
 import { Container, Row } from 'react-bootstrap';
 import { AbilityContext } from '../casl/Can';
+import { CONFIG } from '..';
 // import { Outlet } from 'react-router-dom';
 
 function Layout() {
@@ -14,7 +15,7 @@ function Layout() {
 		<div>
 			{/* developermode show denilen bir claim varsa bu durumda sadece header developerlar görebilir. */}
 			{ability.can('DeveloperMode', 'Show') && (
-				<Header text='React TS 18.2.0 version' />
+				<Header text="React TS 18.2.0 version" />
 			)}
 			<Menu />
 
@@ -34,9 +35,10 @@ function Layout() {
 							position: 'fixed',
 							width: '100%',
 							bottom: '0',
-						}}>
+						}}
+					>
 						<p>
-							<span>{'\u00a9'}</span> Gulsan Holding
+							<span>{'\u00a9'}</span> Gulsan Holding import Env:
 						</p>
 						<span>{new Date().getFullYear()}</span>
 					</Row>

@@ -1,5 +1,5 @@
 export interface LoginModel {
-	email: string;
+	username: string;
 	password: string;
 }
 
@@ -29,7 +29,7 @@ export class LoginClient implements ILoginClient {
 
 	constructor() {
 		this.httpClient = new HttpClient({
-			baseUrl: 'https://localhost:7044/',
+			baseUrl: 'https://localhost:7093/',
 			headers: new AxiosHeaders().set('Content-Type', 'application/json'),
 		});
 	}
@@ -49,7 +49,7 @@ export class LoginClient implements ILoginClient {
 			console.log('token', token);
 
 			LocalStorageService.setAccessToken(token.accessToken);
-			LocalStorageService.setRefreshToken(token.refreshToken);
+			// LocalStorageService.setRefreshToken(token.refreshToken);
 
 			return Promise.resolve({ isSucceded: true } as LoginResult);
 		} catch (error: any) {

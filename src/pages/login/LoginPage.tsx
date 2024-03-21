@@ -12,7 +12,7 @@ function LoginPage() {
 
 	const loginService = new LoginClient();
 	let [formState, setFormState] = useState<LoginModel>({
-		email: 'test@test.com',
+		username: 'test@test.com',
 		password: 'Test12345?',
 	});
 
@@ -33,33 +33,28 @@ function LoginPage() {
 
 	return (
 		<Row>
-			<Col
-				className='m-auto'
-				md={4}>
-				<div className='container p-5'>
+			<Col className="m-auto" md={4}>
+				<div className="container p-5">
 					<h1> Giriş </h1>
-					<form
-						method='post'
-						onSubmit={onSubmit}
-						noValidate>
+					<form method="post" onSubmit={onSubmit} noValidate>
 						<input
-							defaultValue={formState?.email}
-							className='form-control'
-							type='email'
-							placeholder='email'
+							defaultValue={formState?.username}
+							className="form-control"
+							type="email"
+							placeholder="email"
 							onChange={(event) =>
 								setFormState({
 									...formState,
-									email: event.target.value,
+									username: event.target.value,
 								})
 							}
 						/>
 						<br></br>
 						<input
 							defaultValue={formState.password}
-							className='form-control'
-							type='password'
-							placeholder='password'
+							className="form-control"
+							type="password"
+							placeholder="password"
 							onChange={(event: any) =>
 								setFormState({
 									...formState,
@@ -68,11 +63,11 @@ function LoginPage() {
 							}
 						/>
 						<br></br>
-						<div className='d-flex flex-row'>
+						<div className="d-flex flex-row">
 							<input
-								className='btn btn-success ms-auto'
-								type='submit'
-								value='Oturum Aç'
+								className="btn btn-success ms-auto"
+								type="submit"
+								value="Oturum Aç"
 							/>
 						</div>
 					</form>
