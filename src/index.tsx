@@ -15,7 +15,7 @@ import en from './i18n/en';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-export const CONFIG = require(`./config/config-${process.env.REACT_APP_ENV?.trim()}.json`);
+// export const CONFIG = require(`./config/config-${process.env.REACT_APP_ENV?.trim()}.json`);
 
 // Hangi dil destekleri var
 const resources = {

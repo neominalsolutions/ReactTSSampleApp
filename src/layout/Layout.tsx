@@ -5,7 +5,7 @@ import Footer from './Footer';
 import { Outlet } from 'react-router-dom';
 import { Container, Row } from 'react-bootstrap';
 import { AbilityContext } from '../casl/Can';
-import { CONFIG } from '..';
+// import { CONFIG } from '..';
 // import { Outlet } from 'react-router-dom';
 
 function Layout() {

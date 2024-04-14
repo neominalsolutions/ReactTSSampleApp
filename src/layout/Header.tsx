@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
-import { CONFIG } from '..';
+// import { CONFIG } from '..';
 import styled from 'styled-components';
 
 export type HeaderProps = {
@@ -14,15 +14,16 @@ const Title = styled.h1`
 	color: palevioletred;
 `;
 
-function Header({ text, content = 'Content' }: HeaderProps) {https://testservice.antalya-airport.aero/api
-	return (
+function Header({ text, content = 'Content' }: HeaderProps) {
+	//testservice.antalya-airport.aero/api
+	https: return (
 		<Container fluid style={{ backgroundColor: 'GrayText', color: 'white' }}>
 			<Row>
 				<h5>
 					<Title>{text}</Title>
 				</h5>
 				<p>{process.env.REACT_APP_EmployeeEndPoint} Mode</p>
-				<p>Config Environment : {CONFIG.ENV}</p>
+				{/* <p>Config Environment : {CONFIG.ENV}</p> */}
 
 				{/* <p>{content}</p> */}
 			</Row>

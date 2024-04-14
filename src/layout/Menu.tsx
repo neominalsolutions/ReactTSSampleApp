@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { Ticket } from '../network/taskClient';
 import { useTranslation } from 'react-i18next';
-import { CONFIG } from '..';
+// import { CONFIG } from '..';
 
 export interface IMenu {
 	text: string;
@@ -63,7 +63,7 @@ function Menu() {
 			<Container>
 				<Navbar.Brand href="/">
 					Gulsan Holding
-					<p>{CONFIG.ENV}</p>
+					{/* <p>{CONFIG.ENV}</p> */}
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">

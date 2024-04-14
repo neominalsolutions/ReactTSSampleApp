@@ -3,7 +3,9 @@ import * as DOMPurify from 'dompurify';
 
 function FileUploadPage() {
 	const [file, setFile] = useState<File>();
-	const [src, setSrc] = useState<string>('');
+	const [src, setSrc] = useState<string>(
+		'https://images.unsplash.com/photo-1713008251875-d54f07a2c4e8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+	);
 
 	useEffect(() => {
 		// file state basılıp file state değiştiğine emininiz
@@ -54,12 +56,15 @@ function FileUploadPage() {
 			});
 	};
 
+	const sanitezedImage = DOMPurify.sanitize(
+		`<img width="100px" height="100px" src=${src} />`
+	);
+
 	return (
 		<div>
 			{/* image preview işlemi için fileReader sınıfını kullanabiliriz */}
-			{DOMPurify.sanitize(
-				`<img width={200} height={200} src={DOMPurify.sanitize(${src})} />`
-			)}
+
+			<div dangerouslySetInnerHTML={{ __html: sanitezedImage }}></div>
 
 			<input
 				multiple={false}
