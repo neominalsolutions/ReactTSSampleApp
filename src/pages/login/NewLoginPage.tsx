@@ -13,7 +13,6 @@ import { AbilityContext } from '../../casl/Can';
 import { LocalStorageService } from '../../storage/LocalStorageService';
 import { UserProfileService } from '../../storage/UserProfileService';
 import { useTranslation } from 'react-i18next';
-import nthCheck, { parse, compile } from 'nth-check';
 
 function NewLoginPage() {
 	// register net core ortamındaki asp-for yada html name alanı, forma hangi field register edileceğini yönetir.
@@ -25,8 +24,6 @@ function NewLoginPage() {
 	const navigate = useNavigate(); // hooklar sadece function body içerisinde çağırılırlar.
 	const { t } = useTranslation(); // dil ile ilgili işlemleri yaptığımız hook.
 	// t ile dili key değerine ekrana basabiliriz.
-
-	const passwordCheck = nthCheck('/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/');
 
 	useEffect(() => {
 		// const navigate = useNavigate();
