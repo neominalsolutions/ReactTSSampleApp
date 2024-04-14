@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import * as DOMPurify from 'dompurify';
 
 function FileUploadPage() {
 	const [file, setFile] = useState<File>();
-	const [src, setSrc] = useState<string>();
+	const [src, setSrc] = useState<string>('');
 
 	useEffect(() => {
 		// file state basılıp file state değiştiğine emininiz
@@ -56,19 +57,17 @@ function FileUploadPage() {
 	return (
 		<div>
 			{/* image preview işlemi için fileReader sınıfını kullanabiliriz */}
-			<img
-				width={200}
-				height={200}
-				src={src}></img>
+			{DOMPurify.sanitize(
+				`<img width={200} height={200} src={DOMPurify.sanitize(${src})} />`
+			)}
+
 			<input
 				multiple={false}
-				className='form-control'
-				type='file'
+				className="form-control"
+				type="file"
 				onChange={(event) => fileChange(event)}
 			/>
-			<button
-				className='btn btn-primary'
-				onClick={uploadFile}>
+			<button className="btn btn-primary" onClick={uploadFile}>
 				Upload
 			</button>
 		</div>
