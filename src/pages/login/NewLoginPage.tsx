@@ -135,7 +135,7 @@ function NewLoginPage() {
 										min: 8,
 									}).valueOf(),
 								},
-								validate: (value) => {
+								validate: (value: any) => {
 									return (
 										[/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/].every(
 											(pattern) => pattern.test(value)

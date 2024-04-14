@@ -43,7 +43,10 @@ export class LoginClient implements ILoginClient {
 			// LoginResult ise arayüzden kullanılan success error durumu için tanımladığımız model
 			const token = await this.httpClient.post<LoginModel, TokenModel>(
 				this.endpoint,
-				param
+				param,
+				{
+					'X-CSRFToken': 'X-Token',
+				}
 			);
 
 			console.log('token', token);
