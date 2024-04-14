@@ -45,7 +45,9 @@
     "broadcast-channel":"^3.7.0",
     "rimraf":"^3.0.2",
     "glob":"^7.2.3",
-    "inflight":"^1.0.6"
+    "inflight":"^1.0.6",
+    "fork-ts-checker-webpack-plugin":"^6.5.3",
+    "webpack-dev-server": "^4.15.2"
   },
   "scripts": {
     "start:dev-config": "set REACT_APP_ENV=dev && react-scripts start",
