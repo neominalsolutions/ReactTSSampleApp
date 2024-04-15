@@ -14,6 +14,7 @@ import UsersDetailPage from './pages/users-detail/UsersDetailPage';
 import FileUploadPage from './pages/uploads/FileUploadPage';
 import TicketDetailPage from './pages/ticket/TicketDetailPage';
 import { useTranslation } from 'react-i18next';
+import RegexXSSDemo from './pages/xss/ReactXSSRegex';
 
 // lazy load performans özelliğ ile sayfaları ayrı ayarı dosyalara bölüp kendi içlerinde bir modul olarak çalışacak şekle getirdik.
 // uygulamanın ilk açılışında bu componentlerin hepsi yüklenemez.
@@ -95,6 +96,10 @@ function App() {
 				{
 					path: '/ticket-detail/:id',
 					element: <TicketDetailPage />,
+				},
+				{
+					path: '/regexXSSDemo',
+					Component: RegexXSSDemo,
 				},
 			],
 		},
